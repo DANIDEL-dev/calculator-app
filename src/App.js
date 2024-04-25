@@ -16,7 +16,7 @@ function App() {
     }
   };
   const handler2 = (e) => {
-    if (value.length < MAX_INPUT_LENGTH - 1) {
+    if (value && value.length < MAX_INPUT_LENGTH - 1) {
       setValue(value + e.target.value);
     }
   };
@@ -46,19 +46,19 @@ function App() {
             <input type="button" value="AC" onClick={clear} />
             <input type="button" value="DEL" onClick={del} />
             <input type="button" value="." onClick={handler2} />
-            <input type="button" value="/" onClick={handler1} />
+            <input type="button" value="/" onClick={handler2} />
           </div>
           <div>
             <input type="button" value="7" onClick={handler} />
             <input type="button" value="8" onClick={handler} />
             <input type="button" value="9" onClick={handler} />
-            <input type="button" value="*" onClick={handler1} />
+            <input type="button" value="*" onClick={handler2} />
           </div>
           <div>
             <input type="button" value="4" onClick={handler} />
             <input type="button" value="5" onClick={handler} />
             <input type="button" value="6" onClick={handler} />
-            <input type="button" value="+" onClick={handler1} />
+            <input type="button" value="+" onClick={handler2} />
           </div>
           <div>
             <input type="button" value="1" onClick={handler} />
