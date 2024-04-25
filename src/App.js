@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { evaluate } from "mathjs";
 import "./App.css";
 
 function App() {
@@ -27,9 +28,9 @@ function App() {
   const clear = (e) => {
     setValue("");
   };
-  const evaluate = (e) => {
+  let evals = (e) => {
     try {
-      const result = eval(value);
+      const result = evaluate(value);
       setValue(result.toString());
     } catch (error) {
       setValue("Error");
@@ -73,7 +74,7 @@ function App() {
               className="equallto"
               type="button"
               value="="
-              onClick={evaluate}
+              onClick={evals}
             />
           </div>
         </form>
