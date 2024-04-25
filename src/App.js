@@ -20,10 +20,6 @@ function App() {
       setValue(value + e.target.value);
     }
   };
-  const displayExpression = () => {
-    // Filter out symbols before displaying the input expression
-    return value.replace(/[+\-*\/]/g, "");
-  };
 
   const del = (e) => {
     setValue(value.slice(0, -1));
@@ -44,12 +40,7 @@ function App() {
       <div className="calculator">
         <form action="">
           <div className="display">
-            <input
-              type="text"
-              className="disp"
-              value={displayExpression()}
-              readOnly
-            />
+            <input type="text" className="disp" value={value} readOnly />
           </div>
           <div>
             <input type="button" value="AC" onClick={clear} />
