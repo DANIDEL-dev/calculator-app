@@ -1,23 +1,92 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [value, setValue] = useState("");
+  const MAX_INPUT_LENGTH = 10; // Maximum allowed input length
+
+  const handler = (e) => {
+    if (value.length < MAX_INPUT_LENGTH) {
+      setValue(value + e.target.value);
+    }
+  };
+  const handler1 = (e) => {
+    if (value.length < MAX_INPUT_LENGTH + 1) {
+      setValue(value + e.target.value);
+    }
+  };
+  const handler2 = (e) => {
+    if (value.length < MAX_INPUT_LENGTH - 1) {
+      setValue(value + e.target.value);
+    }
+  };
+  const displayExpression = () => {
+    // Filter out symbols before displaying the input expression
+    return value.replace(/[+\-*\/]/g, "");
+  };
+
+  const del = (e) => {
+    setValue(value.slice(0, -1));
+  };
+  const clear = (e) => {
+    setValue("");
+  };
+  const evaluate = (e) => {
+    try {
+      const result = eval(value);
+      setValue(result.toString());
+    } catch (error) {
+      setValue("Error");
+    }
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="calculator">
+        <form action="">
+          <div className="display">
+            <input
+              type="text"
+              className="disp"
+              value={displayExpression()}
+              readOnly
+            />
+          </div>
+          <div>
+            <input type="button" value="AC" onClick={clear} />
+            <input type="button" value="DEL" onClick={del} />
+            <input type="button" value="." onClick={handler2} />
+            <input type="button" value="/" onClick={handler1} />
+          </div>
+          <div>
+            <input type="button" value="7" onClick={handler} />
+            <input type="button" value="8" onClick={handler} />
+            <input type="button" value="9" onClick={handler} />
+            <input type="button" value="*" onClick={handler1} />
+          </div>
+          <div>
+            <input type="button" value="4" onClick={handler} />
+            <input type="button" value="5" onClick={handler} />
+            <input type="button" value="6" onClick={handler} />
+            <input type="button" value="+" onClick={handler1} />
+          </div>
+          <div>
+            <input type="button" value="1" onClick={handler} />
+            <input type="button" value="2" onClick={handler} />
+            <input type="button" value="3" onClick={handler} />
+            <input type="button" value="-" onClick={handler1} />
+          </div>
+          <div>
+            <input type="button" value="00" onClick={handler2} />
+            <input type="button" value="0" onClick={handler} />
+            <input
+              className="equallto"
+              type="button"
+              value="="
+              onClick={evaluate}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
